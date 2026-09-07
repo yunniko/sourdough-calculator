@@ -1,0 +1,16 @@
+# No database — most svc-lab tools are stateless. Add a `db` service (copy
+# the pattern from when-we-meet/arfid-meals) only if this specific service
+# genuinely needs persistence.
+services:
+  # Production-style app container — opt in with:
+  #   docker compose --profile app up -d --build
+  # (dev flow is just `npm run dev`, no compose needed)
+  app:
+    profiles: ["app"]
+    build: .
+    restart: unless-stopped
+    environment:
+      APP_URL: ${APP_URL:-http://localhost:3000}
+      GOOGLE_SITE_VERIFICATION: ${GOOGLE_SITE_VERIFICATION:-}
+    ports:
+      - "127.0.0.1:30060:3000"
