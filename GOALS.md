@@ -30,13 +30,21 @@ conventions in `E:\CLAUDE\COMPANY\GOALS.md`.
       Vitest unit tests, 5 Playwright e2e tests. All verified locally
       (`npm run build`, `npx vitest run`, `npx playwright test`,
       `npx eslint .` all clean). ✔ 2026-09-07.
-- [ ] M2 — Deploy: git repo, push, clone to VPS, docker compose up,
-      `julai-new-vhost`, verify live over HTTPS, confirm no other site on
-      the host was affected.
+- [x] M2 — Deploy: git repo (`yunniko/sourdough-calculator`, public),
+      pushed, cloned to VPS, `docker compose --profile app up` on port
+      30060, `julai-new-vhost` ran clean in one shot, verified live over
+      HTTPS at https://sourdough.svc.julienika.cz — real browser check
+      on `/recipe-scaler` matched the unit-tested numbers exactly
+      (1000g flour, 75% hydration, 2% salt, 20% starter at 100%
+      hydration → 900g flour, 650g water, 200g starter, 20g salt, 1770g
+      total), and every other host container's uptime confirmed
+      unaffected. ✔ 2026-09-07.
 - [ ] M3 — Monetization once an ad/payment account exists (blocked on
       Owner, same as the other svc-lab services).
 
 **Progress log** (newest first):
+- 2026-09-07 — M2 complete. Deployed to https://sourdough.svc.julienika.cz.
+  Third consecutive clean run of the fixed `julai-new-vhost` script.
 - 2026-09-07 — M1 complete, verified locally. See HANDOVER.md for the
   baker's-percentage derivation. No build/lint issues this time; e2e
   caught one ambiguous test selector (fixed in the test, not the app).

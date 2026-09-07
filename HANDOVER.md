@@ -6,10 +6,12 @@ in `E:\CLAUDE\COMPANY\`.
 
 ## Current state
 
-M1 done and verified locally 2026-09-07: 24 Vitest unit tests, 5
-Playwright e2e tests (real Chromium browser), ESLint clean, `npm run
-build` succeeds with every route statically prerendered. Not yet
-deployed (M2).
+**Live at https://sourdough.svc.julienika.cz** (deployed 2026-09-07).
+M1 and M2 both done and verified: 24 Vitest unit tests, 5 Playwright e2e
+tests, ESLint, and `npm run build` all pass locally; in production,
+verified a real browser computation on `/recipe-scaler` that matched
+the unit-tested numbers exactly, and confirmed every other container on
+the shared VPS kept its prior uptime.
 
 ## How things fit together
 
@@ -75,7 +77,5 @@ tests, rather than something needing a citation.
 
 ## Next steps and open questions
 
-- Deploy (M2) following the standard pattern (see
-  `E:\CLAUDE\COMPANY\INFRASTRUCTURE_DEPLOY.md`), port 30060.
 - Monetization not yet live — blocked on the Owner (see
   `svc-lab/HANDOVER.md`'s Owner action list).
