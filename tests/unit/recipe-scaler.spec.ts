@@ -20,6 +20,27 @@ describe("scaleRecipe", () => {
     expect(r.waterInMix).toBe(650);
     expect(r.saltWeight).toBe(20);
     expect(r.totalDoughWeight).toBe(1770);
+    expect(r.prefermentedFlourPercent).toBe(10);
+  });
+
+  it("computes prefermented flour % (PFF) as flourInStarter / totalFlour", () => {
+    // PFF is the figure professional formulas (Hamelman) actually print,
+    // distinct from the `starterPercent` the caller passes in - see the
+    // field's own doc comment in lib/recipe-scaler.ts. This tool models a
+    // single undifferentiated starter (no separate seed/levain-build
+    // stages), so this checks the formula's own arithmetic, not a
+    // real published recipe's exact PFF figure.
+    const r = scaleRecipe({
+      basis: "flour",
+      amount: 1000,
+      hydrationPercent: 75,
+      saltPercent: 2,
+      starterPercent: 10, // 10% of total flour, at 100% hydration
+      starterHydrationPercent: 100,
+    });
+    // starterWeight = 100g, split evenly at 100% hydration -> 50g flour
+    expect(r.flourInStarter).toBe(50);
+    expect(r.prefermentedFlourPercent).toBe(5);
   });
 
   it("never double-counts the starter's own flour/water", () => {

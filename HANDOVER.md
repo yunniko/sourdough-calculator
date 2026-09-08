@@ -69,13 +69,77 @@ resulting hydration of old+new combined — stated explicitly in the FAQ
 copy on `/starter-feeding` to avoid overclaiming precision.
 
 **D5 — Data/formulas came from working through the math directly, not
-from an external source, unlike `yarn-gauge-converter`'s reference
-tables.** Baker's-percentage math is a well-established, unambiguous
-technique (not a "several sources disagree" situation like yarn naming
-conventions) — the derivation in D1 is the source of truth, checked by
-tests, rather than something needing a citation.
+from an external source.** *(Corrected 2026-09-08 — see D6: this
+entry's original claim that baker's-percentage math is "unambiguous...
+not a 'several sources disagree' situation" turned out to be wrong. The
+arithmetic is unambiguous; the naming conventions around it are not —
+kept here for the record, not deleted, per the charter's append-only
+correction rule.)* The derivation in D1 is algebraically self-verifying
+regardless — that part of this entry's reasoning holds.
+
+**D6 — Domain-expert review (2026-09-08) found real issues; several
+fixed same day.** Per `COMPANY\STANDARDS.md`'s "Domain depth" guidance,
+a `domain-expert` subagent reviewed this project's baking convention
+against real professional/community sources (Hamelman's *Bread*, The
+Perfect Loaf, The Sourdough Journey, published microbiology on
+starter fermentation). Full findings in `docs/domain-reference.md`.
+Headline result: **the core `recipe-scaler.ts` math is real professional
+convention, verified against a published TPL formula's actual gram
+weights to within 0.04 percentage points** — not invented. But the
+review also found:
+- **A misattributed citation** (fixed): the header comment credited "The
+  Perfect Loaf" and "The Sourdough Journey" with using the
+  subtract-the-preferment convention by default. TPL's own explainer
+  article says the opposite for its default guidance. Hamelman's *Bread*
+  is the accurate citation — corrected in `lib/recipe-scaler.ts`'s header.
+- **A real, unlabeled ambiguity in what "Starter %" means** (fixed): TPL
+  itself prints "levain %" against two different denominators on the
+  same recipe page (mix flour in one place, total flour in another) —
+  someone typing a recipe's percentage into this tool's `starterPercent`
+  field (always % of total flour) can get meaningfully more or less
+  starter than intended (the review's worked example: a ~35% relative
+  over-inoculation, real enough to noticeably shorten bulk fermentation).
+  Fixed by relabeling the field "Starter % (of total flour)", adding an
+  explicit warning in the form's own copy, and surfacing PFF
+  (prefermented flour %, `flourInStarter / totalFlour` — the figure
+  professional formulas actually print) as its own output stat so a
+  user can cross-check against a recipe that quotes PFF directly.
+- **Missing baking-loss caveat** (fixed): `totalDoughWeight` is raw dough
+  weight; a baked loaf loses roughly 10-20% more from oven moisture loss.
+  Added as an explicit step in `scaleRecipe`'s output.
+- **An overclaim on the hydration page** (fixed) — see D7.
+- **The starter-feeding FAQ's "first feed or two" claim understated for
+  low ratios** (fixed) — see D8.
+- **The feeding calculator's real gap isn't the steady-state assumption
+  (that one's fine, see D4) — it's that it has no discard/current-jar
+  awareness** (documented, not built — real feature work, out of scope
+  for this pass): a user with 200g already in the jar entering 200g at
+  1:5:5 gets told to add a full kilo of flour and water on top, with no
+  prompt to discard first. Left as an open item below.
+
+**D7 — Hydration page's claim that hydration is "the single number that
+most determines" dough feel was an overclaim; softened.** The review
+noted flour composition (whole wheat/rye vs. white, milling) changes
+dough feel and crumb at least as much as hydration does at a fixed
+percentage — the two-scalar hydration model can't express flour type at
+all. Fixed the copy on `/hydration` to stop asserting hydration is the
+single dominant factor.
+
+**D8 — Starter-feeding FAQ's "first feed or two won't be exact" claim
+was only accurate for higher feed ratios.** The review quantified
+convergence toward steady-state hydration: for a 1:5:5 (or higher)
+ratio, "one or two feeds" is right. For a 1:1:1 ratio, convergence is
+much slower (roughly four to five feeds from a starter well off its
+steady state) because each feed only dilutes about a third of the prior
+composition rather than most of it. Fixed the FAQ copy to note this
+varies by ratio rather than stating a single number.
 
 ## Next steps and open questions
 
+- Give the starter-feeding calculator discard/current-jar-size awareness
+  (D6's last finding) — e.g. "you have X g, keep Y g, discard the rest,
+  then add..." — or an inverse mode ("I need N g of ripe levain at this
+  ratio, tell me the seed/flour/water"), matching what The Perfect
+  Loaf's own starter calculator does. Real feature work, not a quick fix.
 - Monetization not yet live — blocked on the Owner (see
   `svc-lab/HANDOVER.md`'s Owner action list).

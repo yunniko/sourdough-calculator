@@ -19,7 +19,7 @@ test("recipe scaler computes a full recipe breakdown", async ({ page }) => {
   await page.getByLabel("Amount in grams").fill("1000");
   await page.getByLabel("Hydration percent", { exact: true }).fill("75");
   await page.getByLabel("Salt percent").fill("2");
-  await page.getByLabel("Starter percent").fill("20");
+  await page.getByLabel("Starter percent, of total flour").fill("20");
   await page.getByLabel("Starter hydration percent").fill("100");
 
   const result = page.getByTestId("result");

@@ -85,12 +85,12 @@ export function RecipeScalerForm() {
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="text-sm text-gray-600">Starter %</span>
+          <span className="text-sm text-gray-600">Starter % (of total flour)</span>
           <input
             className="rounded border border-gray-300 px-3 py-2"
             value={starterPercent}
             onChange={(e) => setStarterPercent(e.target.value)}
-            aria-label="Starter percent"
+            aria-label="Starter percent, of total flour"
             inputMode="decimal"
           />
         </label>
@@ -108,6 +108,14 @@ export function RecipeScalerForm() {
       <p className="mt-2 text-xs text-gray-500">
         Percentages are baker&rsquo;s percentages: everything is a share of
         total flour weight, including the flour inside your starter.
+        Careful copying a percentage off a recipe you found elsewhere: some
+        sites print &ldquo;levain %&rdquo; against just the flour added at
+        mix, not total flour including the starter itself — those are
+        different numbers, and using the wrong one here changes how much
+        starter you&rsquo;re really adding. If a recipe gives you the
+        starter&rsquo;s weight directly instead of a percentage, divide it
+        by the total flour weight and multiply by 100 to get the number
+        this field wants.
       </p>
 
       <div className="mt-6" data-testid="result">
@@ -126,6 +134,10 @@ export function RecipeScalerForm() {
               <Stat
                 label="Total dough weight"
                 value={`${round(outcome.result!.totalDoughWeight)} g`}
+              />
+              <Stat
+                label="Prefermented flour (PFF)"
+                value={`${round(outcome.result!.prefermentedFlourPercent)}%`}
               />
             </dl>
             <ol className="mt-4 list-decimal space-y-1 pl-5 text-sm text-gray-700">

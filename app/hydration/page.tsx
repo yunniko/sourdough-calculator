@@ -45,9 +45,9 @@ export default function Page() {
 
       <h1 className="text-3xl font-semibold">Hydration Calculator</h1>
       <p className="mt-3 text-gray-600">
-        Hydration is water weight as a percentage of flour weight — the
-        single number that most determines how wet, sticky, and open-crumbed
-        your dough will be.
+        Hydration is water weight as a percentage of flour weight — one of
+        the biggest factors in how wet, sticky, and open-crumbed your dough
+        will be (flour type and milling matter too, at the same hydration).
       </p>
 
       <div className="mt-6">

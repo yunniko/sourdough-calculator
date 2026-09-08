@@ -13,12 +13,17 @@ const FAQ = [
   {
     question: "What does a feeding ratio like 1:5:5 mean?",
     answer:
-      "Parts by weight of starter : flour : water. 1:5:5 means for every 1g of existing starter, add 5g flour and 5g water. A higher ratio (like 1:10:10) means more food relative to starter, which slows fermentation — useful for a longer window between feeds.",
+      "Parts by weight of starter : flour : water. 1:5:5 means for every 1g of existing starter, add 5g flour and 5g water. A higher ratio (like 1:10:10) means more food relative to starter, which does slow fermentation — but temperature matters more: roughly every 8°C/15°F warmer roughly halves the time to peak, and every 8°C/15°F cooler roughly doubles it, so a hot kitchen can undo what a higher ratio is trying to buy you.",
   },
   {
     question: "Does this account for my starter's current hydration?",
     answer:
-      "It assumes your starter is at a steady state matching your usual feed ratio's hydration, which is true for most maintained starters. If you've just changed your feeding ratio, the first feed or two won't be exact until it settles back to steady state.",
+      "It assumes your starter is at a steady state matching your usual feed ratio's hydration, which is true for most maintained starters. If you've just changed your feeding ratio, how long it takes to settle back to steady state depends on the ratio: at 1:5:5 or higher, one or two feeds gets you close; at a stiffer ratio like 1:1:1, each feed only dilutes roughly a third of the old composition, so it can take four or five feeds.",
+  },
+  {
+    question: "I already have some starter in the jar — do I need to discard first?",
+    answer:
+      "This calculator doesn't currently ask how much you're keeping versus discarding — it assumes the \"starter\" amount you enter is everything you're feeding. If you're maintaining a smaller amount than what's in your jar, discard down to your usual keep amount first, then use that amount here.",
   },
 ];
 
