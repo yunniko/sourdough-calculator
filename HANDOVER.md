@@ -43,6 +43,7 @@ charter: `E:\CLAUDE\COMPANY\`.
 |---|---|---|---|
 | 2026-09-07 | — | First deploy (port 30060) | Real browser computation on `/recipe-scaler` matched unit-tested numbers |
 | 2026-09-08 | e0a0dc8 | Domain-review fixes (D006–D008) | Suite re-run; routes 200 |
+| 2026-09-27 | dfc1640 | Security: next 16.3.1 → 16.3.6 (critical RCE advisories) | lint, unit 25/25, e2e 5/5, build; container reports 16.3.6; all 4 routes 200 in a browser; other containers untouched |
 
 ## Decisions
 
